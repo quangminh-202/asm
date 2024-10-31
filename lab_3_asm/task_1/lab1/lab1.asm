@@ -1,7 +1,4 @@
-extern printf
-extern scanf
-extern malloc
-extern free
+;%include "io64.inc"
 
 section .rodata
     polynomial: dd 0xEDB88320
@@ -11,12 +8,19 @@ section .rodata
     fmt_output: db "%08X", 10, 0
 
 section .text
+extern printf
+extern scanf
+extern malloc
+extern free
 global main
 
+
 main:
+    ;mov rbp, rsp; for correct debugging
     ; i - ECX 
-    ; data - r12
+    ; data - RSI
     ; crc - EDX
+    ;GET_STRING data, 256
     push rbp
     mov rbp, rsp
     sub rsp, 32
